@@ -74,14 +74,13 @@ if(pub_global.xj.viewportOption[pub_version] !== undefined){ Object.keys(pub_glo
 var pub_win = pub_global;
 var pub_doc = pub_win.document;
 var pub_html = pub_doc.documentElement;
-var pub_body = pub_doc.body;
 
 
 
 // meta 标签，移动端，是否 IOS 系统
 var pub_element_meta = pub_doc.querySelector('meta[name="viewport"]');
 var pub_is_mobile = /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent);
-var pub_is_ios = (pub_is_mobile === true && /Apple/i.test(navigator.vendor) === true) ? true : false;
+var pub_is_ios = (pub_is_mobile && /Apple/i.test(navigator.vendor)) ? true : false;
 
 
 
