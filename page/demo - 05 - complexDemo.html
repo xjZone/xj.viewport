@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" xj-viewport="{minWidth:320, minHeight:480, fillScreen:true, onlyMobile:false}" content="width=device-width,initial-scale=1" />
+<script src="../dist/xj.viewport.js"></script>
+
+<style>
+html{height:100%;font:12px/1.6666 Iosevka, Menlo, Consolas, "Hiragino Sans GB", "Microsoft YaHei", Monospace;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;}
+body{display:inline-block;margin:0;width:100%;height:100%;background-color:#000000;color:#333;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+
+*, *:before, *:after{box-sizing:border-box;}
+.pack{position:relative;overflow:hidden;width:100%;height:100%;cursor:default;}
+.wrap{position:absolute;top:50%;left:50%;overflow:hidden;max-width:360px;max-height:540px;width:100%;height:100%;transform:translate(-50%, -50%);}
+
+.body{position:relative;width:100%;height:100%;}
+.page{position:relative;width:100%;height:100%;}
+
+.page01{background-color:#cce698;}
+.page02{background-color:#d6ebf2;}
+.page03{background-color:#ffdae0;}
+.page04{background-color:#f2f2fc;}
+
+.page01 .main{background-color:#9acd32;}
+.page02 .main{background-color:#add8e6;}
+.page03 .main{background-color:#ffb6c1;}
+.page04 .main{background-color:#e6e6fa;}
+
+.main{position:absolute;top:50%;left:50%;margin:-240px 0 0 -160px;padding:16px;padding-top:48px;width:320px;height:480px;}
+
+.logo{position:absolute;top:50%;left:50%;z-index:100;margin:-240px 0 0 -160px;width:120px;height:40px;background-color:rgba(255,255,255,0.25);text-align:center;text-shadow:0 0 4px #fff;line-height:40px;}
+
+.rise{position:absolute;bottom:24px;left:50%;z-index:100;margin-left:-12px;width:24px;height:24px;color:#fff;text-align:center;text-shadow:0 4px 8px rgba(0,0,0,0.25);font-size:24px;line-height:1;animation:rise 2000ms infinite ease-in-out;}
+
+@keyframes rise{
+	0%{opacity:0;transform:translateY(8px);}
+	50%{opacity:1;transform:translateY(-8px);}
+	75%{opacity:0;transform:translateY(-8px);}
+	100%{opacity:0;transform:translateY(8px);}
+}
+
+</style>
+
+<title>complexDemo</title>
+</head>
+<body>
+
+
+
+<div class="pack">
+	<div class="wrap">
+		<div class="body">
+			
+			<div class="page page01">
+				<div class="main">
+					中间这部分是主体，必定能被用户看到的<br />
+					四周浅色部分是背景延伸，用户不一定能看到<br />
+					最外层黑色部分是溢出的，这部分可以不用理会了<br />
+				</div>
+			</div>
+			
+			<div class="page page02">
+				<div class="main">Page02</div>
+			</div>
+			
+			<div class="page page03">
+				<div class="main">Page03</div>
+			</div>
+			
+			<div class="page page04">
+				<div class="main">Page04</div>
+			</div>
+				
+		</div>
+	</div>
+</div>
+
+<div class="logo">LOGO</div>
+<div class="rise"> ︽ </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.transit@0.9.12/jquery.transit.min.js"></script>
+<script>
+(function(){
+
+
+
+// 阻尼函数，来源地址 https://www.jianshu.com/p/3e3aeab63555/
+// 拖曳到顶部或底部溢出时，执行这个阻尼函数，计算产生阻尼效果
+var damping = function(x, max){
+	var y = Math.abs(x);
+	y = 0.8 * max / (1 + 
+	4000 / Math.pow(y, 1.16));
+	return Math.round(x < 0 ? -y : y);
+};
+
+
+
+// 阻止触屏设备的的滚动事件，但是如果发现有多个触摸点就不阻止
+// 因为此时可能是用户对页面进行捏合缩放，如果阻止就无法缩放了
+var touchable = 'ontouchstart' in document;
+if(touchable === true){ 
+	document.addEventListener('touchmove', function(event){
+		if(event.touches.length >= 2){ return };
+		event.preventDefault();
+	}, {passive:false});
+};
+
+
+
+// 触发 resize 事件时更新 clientHeight 和 scrollHeight 的尺寸
+// 并对 jqi_ele_body 重新定位，避免翻转后页面定位出错卡在中间
+var bodyTranslateY = 0;
+$(window).resize(function(){
+	clientHeight = jqi_ele_body[0].clientHeight;
+	scrollHeight = jqi_ele_body[0].scrollHeight;
+	bodyTranslateY = parseInt(jqi_ele_body.css('y'));
+	jqi_ele_body.css('y', Math.round(bodyTranslateY/clientHeight) * clientHeight);
+});
+
+
+
+// 以下是拖曳内容，为了 PC 端也能运行，把 mouse* 事件也绑定上
+// transition 动画在部分浏览器会闪烁，所以继续用 animate 方法
+
+var jqi_ele_body = $('.body');							// .body 的 jQuery 实例
+var clientHeight = jqi_ele_body[0].clientHeight;		// .body 不包括滚动部分的高度
+var scrollHeight = jqi_ele_body[0].scrollHeight;		// .body 还包括了可滚动部分的总高度
+
+var bodyStartY = 0;										// .body 拖曳前的 translateY
+var bodyMoveY = 0;										// .body 拖曳中的 translateY
+var bodyEndY = 0;										// .body 移动后的 translateY
+
+var dragStart = false;									// 页面开始拖曳的标记
+var dragMove = false;									// 页面正在拖曳的标记
+var dragEnd = true;										// 页面结束拖曳的标记
+
+var startY = 0;											// 拖曳起始坐标
+var moveY = 0;											// 拖曳移动坐标
+var endY = 0;											// 拖曳结束坐标
+
+
+
+// 开始拖曳
+$(document).on(touchable ? 'touchstart' : 'mousedown', function(event){
+	
+	// 如果正在拖曳移动中，或移动还未结束则直接返回
+	if(dragMove === true || dragEnd === false){ return };
+	
+	// 如果是 PC 端的鼠标但点击不是左键也返回
+	if(event.type === 'mousedown' && event.button !== 0){ return };
+	
+	// 如果页面上存在多个触摸点就不继续
+	if(event.touches !== undefined && event.touches.length >= 2){ return };
+	
+	// 根据对象属性获取点击位置
+	startY = (event.touches !== undefined ? event.touches[0].clientY : event.clientY);
+	
+	// 开始拖曳的标记符
+	dragStart = true;
+	
+	// 获取 body 元素的 translateY 位置
+	bodyStartY = parseInt(jqi_ele_body.css('y'));
+	
+});
+
+
+
+// 拖曳移动
+$(document).on(touchable ? 'touchmove' : 'mousemove', function(event){
+	
+	// 如果并没有点击或移动还未结束则直接返回
+	if(dragStart === false || dragEnd === false){ return };
+	
+	// 如果页面上存在多个触摸点就不继续
+	if(event.touches !== undefined && event.touches.length >= 2){ return };
+	
+	// 根据对象属性获取点击位置
+	moveY = (event.touches !== undefined ? event.touches[0].clientY : event.clientY);
+	
+	// 开始移动的标记符
+	dragMove = true;
+	
+	// 计算当前拖曳导致移动的距离
+	bodyMoveY = bodyStartY - (startY - moveY);
+	
+	// 向上或向下超出，使用阻尼函数处理数值
+	if(bodyMoveY > 0){ bodyMoveY = damping(bodyMoveY, clientHeight) }else if(bodyMoveY < clientHeight - scrollHeight){
+		bodyMoveY = damping(Math.abs(scrollHeight - clientHeight + bodyMoveY), clientHeight)
+		bodyMoveY = -(scrollHeight - clientHeight + bodyMoveY);
+	};
+	
+	// 更新当前拖曳位置
+	jqi_ele_body.css('y', bodyMoveY);
+	
+});
+
+
+
+// 拖曳结束
+$(document).on(touchable ? 'touchend' : 'mouseup', function(event){
+	
+	// 如果根本没有开始或移动过，那就不再继续
+	if(dragStart === false || dragMove === false){ return };
+	
+	// 根据拖曳移动的距离，设置不同的移动结果
+	if(bodyMoveY > 0){ bodyEndY = 0 } 															// 向上超出，那就恢复到第一页
+	else if(Math.abs(startY - moveY) < 24){ bodyEndY = bodyStartY } 							// 少于 24px 那就恢复页面原状
+	else if(bodyMoveY < clientHeight - scrollHeight){ bodyEndY = clientHeight - scrollHeight }	// 向下超出，就恢复到最后一页
+	else{																						// 根据向上或向下进行整页移动 
+		if(bodyStartY > bodyMoveY){ bodyEndY = bodyStartY - clientHeight }
+		else{ bodyEndY = bodyStartY + clientHeight };
+	};
+	
+	// 执行 body 的移动动画，并输出当前页索引
+	jqi_ele_body.animate({y : bodyEndY}, 250, function(){
+		console.log(Math.abs(bodyEndY/clientHeight));
+		dragStart = dragMove = false;
+		dragEnd = true;
+	});
+		
+});
+
+
+
+// 禁止滚动
+$(window).add('html').add('body').add(jqi_ele_body).on('scroll', function(){
+	this.scrollLeft = this.scrollTop = 0;
+});
+
+
+
+})();
+</script>
+
+
+
+</body>
+</html>
+
+

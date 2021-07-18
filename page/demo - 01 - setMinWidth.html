@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" xj-viewport="{minWidth:512, onlyMobile:false}" content="width=device-width,initial-scale=1" />
+<script src="../dist/xj.viewport.js"></script>
+
+<style>
+html,body{margin:0;-webkit-text-size-adjust:100%;}
+.div01{width:100%;background-color:yellowgreen;}
+.div02{width:256px;background-color:lightblue;}
+</style>
+
+<title>setMinWidth</title>
+</head>
+<body>
+
+
+
+<div class="div01">这个 div 的 width 为 100%</div>
+<div class="div02">这个 div 的 width 为 256px</div>
+<br />
+
+<div>设备宽度小于 512px 则会被设置为 512px</div>
+<div>大于则不做修改，尝试翻转屏幕查看结果吧</div>
+<br />
+
+<div>页面时初始视窗的值 : width=device-width,initial-scale=1</div>
+<div>标签内联属性的设置 : "{minWidth:512, onlyMobile:false}"</div>
+<br />
+
+<div id="viewportDetails"></div>
+<div id="viewportContent"></div>
+<br />
+
+
+
+<script>
+// 获取当前窗口的设置、尺寸、方向
+var resizeListener = function(){
+	document.getElementById('viewportContent').innerHTML = xj.viewport.get();
+	document.getElementById('viewportDetails').innerHTML = xj.viewport.width() + ' / ' + xj.viewport.height() +' / '+ xj.viewport.orientation();
+};
+resizeListener();
+window.addEventListener('resize', resizeListener, false);
+</script>
+
+
+
+</body>
+</html>
+
+
