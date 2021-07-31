@@ -10,8 +10,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.4.0/themes/prism-material-light.css" />
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/prism.js" data-manual="canSolveBug"></script>
+<link id="prism-material-light" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.7.0/themes/prism-material-light.css" />
+<link id="prism-okaidia" rel="alternate stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/themes/prism-okaidia.css" />
+<script data-manual="prevent prismjs auto highlighted" src="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/prism.js"></script>
 
 <link rel="stylesheet" href="../static/plugin/xjDemo/0.1.0/dist/xjDemo.css" />
 <script src="../static/plugin/xjDemo/0.1.0/dist/xjDemo.js"></script>
@@ -49,13 +50,13 @@
 <textarea class="xjDemo" xjDemo="{onlySource:true}">
 <!-- 模式一：推荐，为 meta 标签设置 xj-viewport 属性，在文件加载后，会解析这个属性并自动执行 -->
 <meta name="viewport" xj-viewport="{minWidth:400}" content="width=device-width,initial-scale=1" />
-<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.0/dist/xj.viewport.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.1/dist/xj.viewport.min.js"></script>
 </textarea>
 
 <textarea class="xjDemo" xjDemo="{onlySource:true}">
 <!-- 模式二：不设置内联属性，改为手动执行 -->
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.0/dist/xj.viewport.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.1/dist/xj.viewport.min.js"></script>
 <script>xj.viewport.set({minWidth:400});</script>
 </textarea>
 
@@ -75,7 +76,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" xj-viewport="{minWidth:512}" content="width=device-width,initial-scale=1" />
-		<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.0/dist/xj.viewport.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.1/dist/xj.viewport.min.js"></script>
 		<style>
 			html,body{margin:0;-webkit-text-size-adjust:100%;}
 			.div01{width:100%;background-color:yellowgreen;}
@@ -107,7 +108,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" xj-viewport="{minHeight:1024}" content="width=device-width,initial-scale=1" />
-		<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.0/dist/xj.viewport.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.1/dist/xj.viewport.min.js"></script>
 		<style>
 			html,body{margin:0;-webkit-text-size-adjust:100%;}
 			.div01{height:512px;background-color:yellowgreen;}
@@ -146,7 +147,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" xj-viewport="{minWidth:512, minHeight:1024}" content="width=device-width,initial-scale=1" />
-		<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.0/dist/xj.viewport.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.1/dist/xj.viewport.min.js"></script>
 		<style>
 			html,body{margin:0;overflow:hidden;-webkit-text-size-adjust:100%;background-color:yellowgreen;}
 			.pack{position:absolute;top:50%;left:50%;margin:-512px 0 0 -256px;width:512px;height:1024px;background-color:lightblue;}
@@ -185,7 +186,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" xj-viewport="{minWidth:320, minHeight:480, fillScreen:true}" content="width=device-width,initial-scale=1" />
-		<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.0/dist/xj.viewport.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.1/dist/xj.viewport.min.js"></script>
 		<style>
 			html,body{margin:0;overflow:hidden;-webkit-text-size-adjust:100%;background-color:yellowgreen;}
 			.pack{position:absolute;top:50%;left:50%;margin:-240px 0 0 -160px;width:320px;height:480px;background-color:lightblue;}
@@ -258,7 +259,7 @@ xj.viewport.set({
 // 中括号里的是版本号
 if(window.xj === undefined){ xj = {} };
 if(xj.viewportOption === undefined){ xj.viewportOption = {} };
-xj.viewportOption['0.3.0'] = {
+xj.viewportOption['0.3.1'] = {
 	// 这里可接受的内容跟 xj.viewport.set() 方法的参数值一样，
 	// 所以就不再重复了，想知道这里究竟能写什么东西，看看上面 set() 方法中的对象内容就可以了。
 };
@@ -304,7 +305,7 @@ console.log( xj.viewport.set() );				// 设置 meta[name="viewport"] 标签的 c
 // 中括号里的是版本号
 if(window.xj === undefined){ xj = {} };
 if(xj.viewportConfig === undefined){ xj.viewportConfig = {} };
-xj.viewportConfig['0.3.0'] = {
+xj.viewportConfig['0.3.1'] = {
 	
 	// 当插件检测到 meta[name="viewport"] 标签上有设置 xj-viewport="{}" 属性，就会解析这个属性，并自动执行 xj.viewport.set() 方法进行设置，如果该参数设置为 true，则不会自动执行，参数默认为 false
 	manual : false,
@@ -352,18 +353,18 @@ xj.viewportConfig['0.3.0'] = {
 
 
 <script>
-// 可在引入插件前，通过 xj.viewportConfig['0.3.0'] 对 set() 方法的参数进行预设，注意版本号要相同
-// 可在引入插件前，通过 xj.viewportOption['0.3.0'] 对 xj.viewport 进行全局配置，注意版本号要相同
+// 可在引入插件前，通过 xj.viewportConfig['0.3.1'] 对 set() 方法的参数进行预设，注意版本号要相同
+// 可在引入插件前，通过 xj.viewportOption['0.3.1'] 对 xj.viewport 进行全局配置，注意版本号要相同
 // if(window.xj === undefined){ xj = {} };
 
 // if(xj.viewportConfig === undefined){ xj.viewportConfig = {} };
-// xj.viewportConfig['0.3.0'] = {
+// xj.viewportConfig['0.3.1'] = {
 // 	manual : true,
 // 	betkbd : 248,
 // };
 
 // if(xj.viewportOption === undefined){ xj.viewportOption = {} };
-// xj.viewportOption['0.3.0'] = {
+// xj.viewportOption['0.3.1'] = {
 //	onlyMobile : false,
 //	viewportFit : 'cover',
 //};
@@ -399,11 +400,10 @@ window.insertScript = function(option){
 window.insertScript({src : '../dist/xj.viewport.js', onload : function(){
 
 xj.viewport.set({minWidth:400});
-
 console.log(xj.viewport);
 
 // {
-// 	version : '0.3.0',		// 当前插件和配置的版本号
+// 	version : '0.3.1',		// 当前插件和配置的版本号
 //	element : viewport,		// meta[name="viewport"] 标签
 // 	
 // 	width :ƒ(),				// 获取当前视窗的宽度，不包括地址栏和滚动部分

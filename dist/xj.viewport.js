@@ -1,4 +1,4 @@
-/** xj.viewport(视窗属性设置) | V0.3.0 | Apache Licence 2.0 | 2015-2021 © XJ.Chen | https://github.com/xjZone/xj.viewport */
+/** xj.viewport(视窗属性设置) | V0.3.1 | Apache Licence 2.0 | 2015-2021 © XJ.Chen | https://github.com/xjZone/xj.viewport */
 ;(function(global, factory){
 	if(typeof(define) === 'function' && (define.amd !== undefined || define.cmd !== undefined)){ define(factory) }
 	else if(typeof(module) !== 'undefined' && typeof(exports) === 'object'){ module.exports = factory() }
@@ -12,12 +12,12 @@
 var pub_global = (typeof(globalThis) !== 'undefined' ? globalThis : typeof(window) !== 'undefined' ? window : typeof(self) !== 'undefined' ? self : global);
 
 // public nothing, version, keyword
-var pub_nothing = function(){}, pub_version = '0.3.0', pub_keyword = 'viewport';
+var pub_nothing = function(){}, pub_version = '0.3.1', pub_keyword = 'viewport';
 
 // public config, advance set
 var pub_config = {
 	
-	// 当插件检测到 meta[name="viewport"] 标签上有设置 xj-viewport="{}" 属性，就会解析这个属性，并自动执行 xj.viewport.set() 方法进行设置，如果该参数设置为 true，则不会自动执行，参数默认为 false
+	// 当插件检测到 meta[name="viewport"] 标签上有设置 xj-viewport="{}" 属性，就会解析这个属性，并自动执行 xj.viewport.set() 方法进行设置，如果该参数设置为 true，则不会自动执行，参数默认是 false
 	manual : false,
 	
 	// 在 Android 的浏览器中，软键盘会影响到窗口尺寸，在有软键盘时不能响应视窗的重置，但实际上我们并没有任何真正靠谱的方法来检测浏览器是否弹起了软键盘，只能是先查看当前聚焦的节点是否为可输入元素
@@ -30,25 +30,24 @@ var pub_config = {
 // public option(14 items)
 var pub_option = {
 	
-	minWidth : 0,				// 这是 set() 方法的参数属性，用于设置视窗的最小宽度值，默认为 0，也就是不设置，当设备的宽度小于该参数时，将通过设置 width 和 initial-scale 将设备宽度变得符合该值
-	minHeight : 0,				// 这是 set() 方法的参数属性，用于设置视窗的最小高度值，默认为 0，也就是不设置，当设备的高度小于该参数时，将通过设置 width 和 initial-scale 将设备高度变得符合该值
+	minWidth : 0,				// 这是 set() 方法的参数属性，用于设置视窗的最小宽度值，默认是 0，也就是不设置，当设备的宽度小于该参数时，将通过设置 width 和 initial-scale 将设备宽度变得符合该值
+	minHeight : 0,				// 这是 set() 方法的参数属性，用于设置视窗的最小高度值，默认是 0，也就是不设置，当设备的高度小于该参数时，将通过设置 width 和 initial-scale 将设备高度变得符合该值
 	
-	onlyMobile : true,			// 这是 set() 方法的参数属性，用于定义是否只对移动端浏览器的 meta[name="viewport"] 标签进行设置，默认为 true，如果设为 false，则 PC 端浏览器的 meta 标签也会被设置
-	fillScreen : false,			// 这是 set() 方法的参数属性，当同时设置了 minWidth 和 minHeight，如果窗口宽高都大于设置的值，是否要进行放大，默认为 false，这个效果一般只用于单页面翻页的特殊项目
+	onlyMobile : true,			// 这是 set() 方法的参数属性，用于定义是否只对移动端浏览器的 meta[name="viewport"] 标签进行设置，默认是 true，如果设为 false，则 PC 端浏览器的 meta 标签也会被设置
+	fillScreen : false,			// 这是 set() 方法的参数属性，当同时设置了 minWidth 和 minHeight，如果窗口宽高都大于设置的值，是否要进行放大，默认是 false，这个效果一般只用于单页面翻页的特殊项目
 	delayReset : 500,			// 这是 set() 方法的参数属性，Android 中部分浏览器如 UC 和 IOS 中部分浏览器如 WX，旋转后立即获取尺寸会出现错误，所以需要延迟响应，该参数是延迟的时间，默认是 500ms
 	
-	initialScale : 'auto',		// 这是 set() 方法的参数属性，用于设置 initial-scale 值，可接受 0.00 - 10.0 之间的值，默认为 'auto'，'auto' 就是让插件自动计算，这属性一般不用设置，让插件计算就行
-	minimumScale : 'none',		// 这是 set() 方法的参数属性，用于设置 minimum-scale 值，可接受 0.00 - 10.0 之间的值，默认为 'none'，也就是不设置，如果设为 'auto'，则使用跟 initialScale 一样的值
-	maximumScale : 'none',		// 这是 set() 方法的参数属性，用于设置 maximum-scale 值，可接受 0.00 - 10.0 之间的值，默认为 'none'，也就是不设置，如果设为 'auto'，则使用跟 initialScale 一样的值
-	userScalable : 'none',		// 这是 set() 方法的参数属性，用于设置 user-scalable 值，备选项有 'yes', 'no' 两个值，默认为 'none'，也就是不设置，该属性和最大最小缩放值的设置在 IOS 10+ 会被忽略
-	userScalable : 'none',		// 这是 set() 方法的参数属性，用于设置 user-scalable 值，备选项有 'yes', 'no' 两个值，默认为 'none'，也就是不设置，IOS10+ 开始会忽略这个属性和最大最小缩放值的设置
+	initialScale : 'auto',		// 这是 set() 方法的参数属性，用于设置 initial-scale 值，可接受 0.00 - 10.0 之间的值，默认是 'auto'，'auto' 就是让插件自动计算，这属性一般不用设置，让插件计算就行
+	minimumScale : 'none',		// 这是 set() 方法的参数属性，用于设置 minimum-scale 值，可接受 0.00 - 10.0 之间的值，默认是 'none'，也就是不设置，如果设为 'auto'，则使用跟 initialScale 一样的值
+	maximumScale : 'none',		// 这是 set() 方法的参数属性，用于设置 maximum-scale 值，可接受 0.00 - 10.0 之间的值，默认是 'none'，也就是不设置，如果设为 'auto'，则使用跟 initialScale 一样的值
+	userScalable : 'none',		// 这是 set() 方法的参数属性，用于设置 user-scalable 值，备选项有 'yes', 'no' 两个值，默认是 'none'，也就是不设置，IOS10+ 开始会忽略这个属性和最大最小缩放值的设置
 	
 	targetDensitydpi : '',		// 这是 set() 方法的参数属性，设置 target-densitydpi 值，默认 ''，也就是不设置，备选项有 'high-dpi', 'medium-dpi', 'low-dpi', 'device-dpi'，该属性已被废弃，可忽略
-	viewportFit : '',			// 这是 set() 方法的参数属性，设置 viewport-fit 值，默认为 ''，也就是不设置，备选项有 'auto', 'cover', 'contain'，该参数主要是针对 iPhoneX，这类刘海屏幕设备的环境
-	resize : true,				// 这是 set() 方法的参数属性，当窗口的尺寸变化或翻转时，是否要重新计算 meta[name="viewport"] 的 content 属性，默认为 true，为 true 注意 userScalable 属性不能为 no
+	viewportFit : '',			// 这是 set() 方法的参数属性，设置 viewport-fit 值，默认是 ''，也就是不设置，备选项有 'auto', 'cover', 'contain'，该参数主要是针对 iPhoneX，这类刘海屏幕设备的环境
+	resize : true,				// 这是 set() 方法的参数属性，当窗口的尺寸变化或翻转时，是否要重新计算 meta[name="viewport"] 的 content 属性，默认是 true，为 true 注意 userScalable 属性不能为 no
 	
-	width : 'auto',				// 这是 set() 方法的参数属性，用于设置 width 值，默认为 'auto'，也就是让插件使用 minWidth 和 minHeight 来计算，如果不是 auto，minWidth 和 minHeight 属性将会被无视
-	height : 'auto',			// 这是 set() 方法的参数属性，用于设置 height 值，默认为 'auto'，也就是让插件使用 minWidth 和 minHeight 来计算，这参数一般不用设置，因为实际上并没有任何浏览器支持
+	width : 'auto',				// 这是 set() 方法的参数属性，用于设置 width 值，默认是 'auto'，也就是让插件使用 minWidth 和 minHeight 来计算，如果不是 auto，minWidth 和 minHeight 属性将会被无视
+	height : 'auto',			// 这是 set() 方法的参数属性，用于设置 height 值，默认是 'auto'，也就是让插件使用 minWidth 和 minHeight 来计算，这参数一般不用设置，因为实际上并没有任何浏览器支持
 	
 };
 
@@ -404,7 +403,8 @@ if(pub_config.manual === false
 };
 
 // 将返回值挂到对应的版本上再返回它
-return pub_global.xj.viewportReturn[pub_version] = pub_return;
+pub_global.xj.viewportReturn[pub_version] = pub_return;
+return pub_return;
 
 
 
