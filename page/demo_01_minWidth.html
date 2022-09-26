@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" xj-viewport="{minWidth:512, onlyMobile:false}" content="width=device-width,initial-scale=1" />
+<script>document.write('<script src="../dist/xj.viewport.js?timeStamp='+ Date.now() +'"><\/script>')</script>
+
+<style>
+@font-face{font-family:"Iosevka";src:url("../static/font/iosevka/6.1.2/iosevka-fixed-regular.woff2") 
+	format("woff2"), url("../static/font/iosevka/6.1.2/iosevka-fixed-regular.woff") format("woff");}
+html{word-break:break-all;font: 14px/1.5 Iosevka, "Microsoft YaHei", "Hiragino Sans GB", Monospace;}
+</style>
+<style>
+html,body{margin:0px;-webkit-text-size-adjust:100%;}
+.div01{width:256px;background-color:yellowgreen;}
+.div02{width:384px;background-color:lightblue;}
+.div03{width:512px;background-color:bisque;}
+</style>
+
+<title>minWidth</title>
+</head>
+<body>
+
+
+
+<div>宽度小于 512px，将会被设置为 512px</div>
+<div>大于则不做修改，尝试翻转屏幕查看吧</div>
+<br />
+
+<div>初始值 : width=device-width,initial-scale=1</div>
+<div>设置值 : {minWidth:512, onlyMobile:false, }</div>
+<br />
+
+<div id="viewportContent"></div>
+<div id="viewportDetails"></div>
+<br />
+
+<div class="div01">width : 256px</div>
+<div class="div02">width : 384px</div>
+<div class="div03">width : 512px</div>
+
+
+
+<script>
+(function(){
+
+// 获取当前窗口的设置、尺寸、方向
+var resizeListener = function(){
+	document.getElementById('viewportContent').innerHTML = 'meta.content : ' + xj.viewport.get();
+	document.getElementById('viewportDetails').innerHTML = 'width : ' + xj.viewport.width() + ' / height : ' + xj.viewport.height() +' / orientation : '+ xj.viewport.orientation();
+};
+resizeListener();
+window.addEventListener('resize', resizeListener, false);
+
+})();
+</script>
+
+
+
+</body>
+</html>
+
+

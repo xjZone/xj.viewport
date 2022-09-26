@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" xj-viewport="{minWidth:400, minHeight:600, fillScreen:true, onlyMobile:false}" content="width=device-width,initial-scale=1" />
+<script>document.write('<script src="../dist/xj.viewport.js?timeStamp='+ Date.now() +'"><\/script>')</script>
+
+<style>
+/* Demo 使用尺寸 400*600 而不是常见的 320*480，因为这样文字尺寸就可默认用 16px 而不是 12px 了 */
+/* 16px 的文字还有缩小的余地，在显示和控制方面会更好，其实现在视窗可控了，所以用什么尺寸都 OK */
+/* 此外该 Demo 还额外为扩展背景预留了 40px 的空间，当面对一些较长的屏幕时，扩展背景可填充空隙 */
+/* 如果不你需要这些扩展背景，那么修改一下 .wrap 类名的样式，将宽高和外边据恢复为 400*600 即可 */
+
+html{overflow:hidden;width:100%;height:100%;font:16px/1.5 Iosevka,Menlo,Consolas,"Hiragino Sans GB","Microsoft YaHei",Monospace;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;}
+body{overflow:hidden;display:inline-block;margin:0;width:100%;height:100%;background-color:#000000;color:#333333;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+
+*, *:before, *:after{box-sizing:border-box;}
+.pack{position:relative;overflow:hidden;width:100%;height:100%;cursor:default;}
+.wrap{position:absolute;top:50%;left:50%;overflow:hidden;margin:-340px 0 0 -240px;width:480px;height:680px;}
+
+.view{position:relative;width:100%;height:100%;}
+.page{position:relative;width:100%;height:100%;}
+
+.page01{background-color:#cdf9cb;}
+.page02{background-color:#ffd3ad;}
+.page03{background-color:#dffbf9;}
+.page04{background-color:#ffe9f4;}
+
+.page01 .page-content{background-color:#9acd32;}
+.page02 .page-content{background-color:#ffa07a;}
+.page03 .page-content{background-color:#add8e6;}
+.page04 .page-content{background-color:#ffb6c1;}
+
+.page-content{position:absolute;top:50%;left:50%;margin:-300px 0 0 -200px;padding:16px;padding-top:48px;width:400px;height:600px;}
+
+.logo{position:absolute;top:50%;left:50%;z-index:100;margin:-300px 0 0 -200px;width:120px;height:40px;background-color:rgba(255,255,255,0.25);text-align:center;line-height:40px;}
+
+.rise{position:absolute;bottom:24px;left:50%;z-index:100;margin-left:-12px;width:24px;height:24px;color:#fff;text-align:center;text-shadow:0 4px 8px rgba(0,0,0,0.25);font-size:24px;line-height:1;animation:rise 2000ms infinite ease-in-out;}
+
+@keyframes rise{
+	0%{opacity:0;transform:translateY(8px);}
+	50%{opacity:1;transform:translateY(-8px);}
+	75%{opacity:0;transform:translateY(-8px);}
+	100%{opacity:0;transform:translateY(8px);}
+}
+</style>
+
+<title>fullPage</title>
+</head>
+<body>
+
+
+
+<div class="pack">
+	<div class="wrap">
+		<div class="view">
+			
+			<div class="page page01">
+				<div class="page-content">
+					中间这部分是主体，必定能被用户看到的<br />
+					四周浅色部分是背景延伸，用户不一定能看到<br />
+					最外层黑色部分是溢出的，这部分可以不用理会了<br />
+				</div>
+			</div>
+			
+			<div class="page page02">
+				<div class="page-content">Page02</div>
+			</div>
+			
+			<div class="page page03">
+				<div class="page-content">Page03</div>
+			</div>
+			
+			<div class="page page04">
+				<div class="page-content">Page04</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div class="logo">LOGO</div>
+<div class="rise"> ︽ </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.transit@0.9.12/jquery.transit.min.js"></script>
+<script>
+(function(){
+
+
+
+// 阻尼函数，来源地址 https://www.jianshu.com/p/3e3aeab63555/
+// 拖曳到顶部或底部溢出时，执行这个阻尼函数，计算产生阻尼效果
+var damping = function(x, max){
+	var y = Math.abs(x);
+	y = 0.8 * max / (1 + 
+	4000 / Math.pow(y, 1.16));
+	return Math.round(x < 0 ? -y : y);
+};
+
+
+
+// 阻止触屏设备的的滚动事件，但是如果发现有多个触摸点就不阻止
+// 因为此时可能是用户对页面进行捏合缩放，如果阻止就无法缩放了
+var touchable = 'ontouchstart' in document;
+if(touchable === true){ 
+	document.addEventListener('touchmove', function(event){
+		if(event.touches.length >= 2){ return }
+		else{ event.preventDefault() };
+	}, {passive: false, });
+};
+
+
+
+// 触发 resize 事件时更新 clientHeight 和 scrollHeight 的尺寸
+// 并对 jqi_ele_view 重新定位，避免翻转后页面定位出错卡在中间
+var viewTranslateY = 0;
+$(window).resize(function(){
+	clientHeight = jqi_ele_view[0].clientHeight;
+	scrollHeight = jqi_ele_view[0].scrollHeight;
+	viewTranslateY = parseInt(jqi_ele_view.css('y'));
+	jqi_ele_view.css('y', Math.round(viewTranslateY/clientHeight) * clientHeight);
+});
+
+
+
+// 以下是拖曳内容，为了 PC 端也能运行，把 mouse* 事件也绑定上
+// transition 动画在部分浏览器会闪烁，所以继续用 animate 方法
+
+var jqi_ele_view = $('.view');							// .view 的 jQuery 实例
+var clientHeight = jqi_ele_view[0].clientHeight;		// .view 不包括滚动部分的高度
+var scrollHeight = jqi_ele_view[0].scrollHeight;		// .view 还包括了可滚动部分的总高度
+
+var viewStartY = 0;										// .view 拖曳前的 translateY
+var viewMoveY = 0;										// .view 拖曳中的 translateY
+var viewEndY = 0;										// .view 移动后的 translateY
+
+var dragStart = false;									// 页面开始拖曳的标记
+var dragMove = false;									// 页面正在拖曳的标记
+var dragEnd = true;										// 页面结束拖曳的标记
+
+var startY = 0;											// 拖曳起始坐标
+var moveY = 0;											// 拖曳移动坐标
+var endY = 0;											// 拖曳结束坐标
+
+
+
+// 开始拖曳
+$(document).on(touchable ? 'touchstart' : 'mousedown', function(event){
+	
+	// 如果正在拖曳移动中，或移动还未结束则直接返回
+	if(dragMove === true || dragEnd === false){ return };
+	
+	// 如果是 PC 端的鼠标但点击不是左键也返回
+	if(event.type === 'mousedown' && event.button !== 0){ return };
+	
+	// 如果页面上存在多个触摸点就不继续
+	if(event.touches !== undefined && event.touches.length >= 2){ return };
+	
+	// 根据对象属性获取点击位置
+	startY = (event.touches !== undefined ? event.touches[0].clientY : event.clientY);
+	
+	// 开始拖曳的标记符
+	dragStart = true;
+	
+	// 获取 view 元素的 translateY 位置
+	viewStartY = parseInt(jqi_ele_view.css('y'));
+	
+});
+
+
+
+// 拖曳移动
+$(document).on(touchable ? 'touchmove' : 'mousemove', function(event){
+	
+	// 如果并没有点击或移动还未结束则直接返回
+	if(dragStart === false || dragEnd === false){ return };
+	
+	// 如果页面上存在多个触摸点就不继续
+	if(event.touches !== undefined && event.touches.length >= 2){ return };
+	
+	// 根据对象属性获取点击位置
+	moveY = (event.touches !== undefined ? event.touches[0].clientY : event.clientY);
+	
+	// 开始移动的标记符
+	dragMove = true;
+	
+	// 计算当前拖曳导致移动的距离
+	viewMoveY = viewStartY - (startY - moveY);
+	
+	// 向上或向下超出，使用阻尼函数处理数值
+	if(viewMoveY > 0){ viewMoveY = damping(viewMoveY, clientHeight) }else if(viewMoveY < clientHeight - scrollHeight){
+		viewMoveY = damping(Math.abs(scrollHeight - clientHeight + viewMoveY), clientHeight)
+		viewMoveY = -(scrollHeight - clientHeight + viewMoveY);
+	};
+	
+	// 更新当前拖曳位置
+	jqi_ele_view.css('y', viewMoveY);
+	
+});
+
+
+
+// 拖曳结束
+$(document).on(touchable ? 'touchend' : 'mouseup', function(event){
+	
+	// 如果根本没有开始或移动过，那就不再继续
+	if(dragStart === false || dragMove === false){ return };
+	
+	// 根据拖曳移动的距离，设置不同的移动结果
+	if(viewMoveY > 0){ viewEndY = 0 } 															// 向上超出，那就恢复到第一页
+	else if(Math.abs(startY - moveY) < 24){ viewEndY = viewStartY } 							// 少于 24px 那就恢复页面原状
+	else if(viewMoveY < clientHeight - scrollHeight){ viewEndY = clientHeight - scrollHeight }	// 向下超出，就恢复到最后一页
+	else{																						// 根据向上或向下进行整页移动 
+		if(viewStartY > viewMoveY){ viewEndY = viewStartY - clientHeight }
+		else{ viewEndY = viewStartY + clientHeight };
+	};
+	
+	// 执行 view 的移动动画，并输出当前页索引
+	jqi_ele_view.animate({y : viewEndY}, 250, function(){
+		console.log(Math.abs(viewEndY/clientHeight));
+		dragStart = dragMove = false;
+		dragEnd = true;
+	});
+	
+});
+
+
+
+// 禁止滚动
+$(window).add('html').add('body').add(jqi_ele_view).on('scroll', function(){
+	this.scrollLeft = this.scrollTop = 0;
+});
+
+
+
+})();
+</script>
+
+
+
+</body>
+</html>
+
+

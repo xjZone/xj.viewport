@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" xj-viewport="{minWidth:512, minHeight:768, onlyMobile:false}" content="width=device-width,initial-scale=1" />
+<script>document.write('<script src="../dist/xj.viewport.js?timeStamp='+ Date.now() +'"><\/script>')</script>
+
+<style>
+@font-face{font-family:"Iosevka";src:url("../static/font/iosevka/6.1.2/iosevka-fixed-regular.woff2") 
+	format("woff2"), url("../static/font/iosevka/6.1.2/iosevka-fixed-regular.woff") format("woff");}
+html{word-break:break-all;font: 14px/1.5 Iosevka, "Microsoft YaHei", "Hiragino Sans GB", Monospace;}
+</style>
+<style>
+html,body{margin:0;overflow:hidden;-webkit-text-size-adjust:100%;background-color:yellowgreen;}
+.pack{position:absolute;top:50%;left:50%;margin:-384px 0 0 -256px;width:512px;height:768px;background-color:lightblue;}
+</style>
+
+<title>minSize</title>
+</head>
+<body>
+
+
+
+<div class="pack">
+	<div>这个 div 的尺寸是 512px * 768px，如果设备尺寸小于插件设置的值，则视窗会被设置为符合这个值，如果大于则不做修改。</div>
+	<br />
+	<div>初始值 : width=device-width,initial-scale=1，设置值 : {minWidth:512, minHeight:768, onlyMobile:false, }</div>
+	<br />
+	<div><span id="viewportContent"></span>，<span id="viewportDetails"></span></div>
+	<br />
+</div>
+
+
+
+<script>
+(function(){
+
+// 获取当前窗口的设置、尺寸、方向
+var resizeListener = function(){
+	document.getElementById('viewportContent').innerHTML = 'content : ' + xj.viewport.get();
+	document.getElementById('viewportDetails').innerHTML = 'width : ' + xj.viewport.width() + ' / height : ' + xj.viewport.height() +' / orientation : '+ xj.viewport.orientation();
+};
+resizeListener();
+window.addEventListener('resize', resizeListener, false);
+
+// 阻止 Firefox(Android) 触屏滚动，这样可以解决浏览器尺寸计算 BUG
+if(/Firefox/i.test(navigator.userAgent) && /Android/i.test(navigator.userAgent)){
+	document.addEventListener('touchmove', function(event){
+		if(event.touches.length >= 2){ return };
+		event.preventDefault();
+	}, {passive:false});
+};
+
+})();
+</script>
+
+
+
+</body>
+</html>
+
+

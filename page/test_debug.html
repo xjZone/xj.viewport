@@ -4,20 +4,15 @@
 <meta charset="utf-8" />
 <meta name="renderer" content="webkit" />
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-<script src="./static/cj/xj.plugins.setting.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script>
-<script>document.addEventListener('DOMContentLoaded',function(){
-FastClick.attach(document.body)},false);</script>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 
 <!-- <meta name="viewport" xj-viewport="{minWidth:400, }" content="width=device-width,initial-scale=1" /> -->
 <!-- <script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.2/dist/xj.viewport.min.js"></script> -->
-<meta name="viewport" xj-viewport="{minWidth: 400, }" 
-	content="width=device-width,initial-scale=1" />
-<script src="./dist/xj.viewport.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="../static/cj/xj.plugins.setting.js"></script>
 
 <script src="https://cdn.jsdelivr.net/gh/xjZone/xj.storage@0.2.2/dist/xj.storage.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/xjZone/xj.operate@0.5.0/dist/xj.operate.min.js"></script>
@@ -28,112 +23,36 @@ FastClick.attach(document.body)},false);</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xjZone/xj.focus@0.3.2/dist/xj.focus.min.css" />
 <script src="https://cdn.jsdelivr.net/gh/xjZone/xj.focus@0.3.2/dist/xj.focus.min.js"></script>
 
-<link rel="stylesheet" href="./static/plugin/xj.base/0.4.0/dist/xj.base.min.css" />
-<script src="./static/plugin/xj.base/0.4.0/dist/xj.base.min.js"></script>
+<link id="prism-theme-white" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.7.0/themes/prism-material-light.css" />
+<link id="prism-theme-black" rel="alternate stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism-okaidia.css" />
+<script data-manual="prevent prism auto highlighted pre or code" src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.js"></script>
 
-<script src="./static/plugin/xjArrive/0.3.2/dist/xjArrive.min.js"></script>
+<link rel="stylesheet" href="../static/plugin/xjDemo/0.1.0/dist/xjDemo.min.css" />
+<script src="../static/plugin/xjDemo/0.1.0/dist/xjDemo.min.js"></script>
 
-<link id="prism-theme-white" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-material-light.min.css" />
-<link id="prism-theme-black" rel="alternate stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism-okaidia.min.css" />
-<script data-manual="prevent prism auto highlighted pre or code" src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.min.js"></script>
+<!-- <script>document.addEventListener('DOMContentLoaded',function(){FastClick.attach(document.body)},false);</script> -->
+<!-- <style>html[class~="xj-base-black"] body{background-color:#333;color:#fff;}</style> -->
 
-<link rel="stylesheet" href="./static/plugin/xjDemo/0.1.0/dist/xjDemo.min.css" />
-<script src="./static/plugin/xjDemo/0.1.0/dist/xjDemo.min.js"></script>
+<!--◇
+<link rel="stylesheet" href="../static/plugin/xj.base/0.4.0/dist/xj.base.css" />
+<script src="../static/plugin/xj.base/0.4.0/dist/xj.base.js"></script>
+◇-->
 
-<link rel="stylesheet" href="./static/plugin/xjScroll/0.4.0/dist/xjScroll.min.css" />
-<script src="./static/plugin/xjScroll/0.4.0/dist/xjScroll.min.js"></script>
+<!--◇
+<link rel="stylesheet" href="../dist/xj.viewport.css" />
+<script src="../dist/xj.viewport.js"></script>
+◇-->
 
-<link rel="stylesheet" href="./static/plugin/xjDir/0.2.0/dist/xjDir.min.css" />
-<script src="./static/plugin/xjDir/0.2.0/dist/xjDir.min.js"></script>
-
-<!-- ↑ Public | Private ↓ -->
-
-<link rel="stylesheet" href="./static/cj/index.css?date=2022-09-27" />
-<script src="./static/cj/index.js?date=2022-09-27"></script>
-<!-- <script>document.write('<link rel="stylesheet" href="./static/cj/index.css?timeStamp='+ Date.now() +'" />')</script>
-<script>document.write('<script src="./static/cj/index.js?timeStamp='+ Date.now() +'"><\/script>')</script> -->
-
-<title>xj.viewport</title>
+<style>
+@font-face{font-family:"Iosevka";src:local('Iosevka'), url("../static/font/iosevka/6.1.2/iosevka-fixed-regular.woff2") format("woff2"), url("../static/font/iosevka/6.1.2/iosevka-fixed-regular.woff") format("woff");}
+a{background-color:transparent;text-decoration:none;cursor:pointer;color:#39f;} html:not(.xj-operate-touch) a:hover{text-decoration:underline;color:#4af;}
+body{box-sizing:border-box;margin:0;padding:0 32px;max-width:1024px;font:16px/1.5 Iosevka,'Microsoft YaHei','Hiragino Sans GB';}
+code{padding:0 8px;background-color:#f0f0f0;color:#f39;font-family:inherit;}
+a > code{color:inherit;}
+</style>
+<title>xj.viewport_debug</title>
 </head>
 <body>
-
-
-
-<div id="pub_side">
-	<div id="pub_sidePack">
-		<div id="pub_sideMask"></div>
-		<div id="pub_sideWrap">
-			
-			<div class="xjScroll" id="xjScroll01" xjScroll="{native:true, resizeCallbackType:'none', }" style="width:100%;height:100%;">
-				<div class="xjDir" id="xjDir01" xjDir="{}" style="padding:8px;width:100%;border-right:none;font-family:inherit;">
-					<ul>
-						<li class="xjDir-spread xjDir-active">
-							<a href="javascript:void(0)">
-								<i class="xjDir-icon fas fa-tablet-screen-button"></i>
-								<i class="xjDir-text">xj.viewport</i>
-								<i class="xjDir-sign"></i>
-							</a>
-							<ul id="xjDir01_ul01"></ul>
-						</li>
-						
-						<li class="xjDir-divide"></li>
-						
-						<li class="xjDir-spread">
-							<a href="javascript:void(0)">
-								<i class="xjDir-icon fas fa-cubes"></i>
-								<i class="xjDir-text">xjZone</i>
-								<i class="xjDir-sign"></i>
-							</a>
-							<ul id="xjDir01_ul02"></ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-			
-		</div>
-	</div>
-</div>
-
-
-
-<div id="pub_head">
-	<div id="pub_headPack">
-		<h1 id="pub_headText"><a class="a-unset" href="">xj.viewport<small> 视窗属性设置</small></a></h1>
-		
-		<form id="pub_headForm" target="_blank" enctype="text/plain" title="Press Enter to Search" action="https://github.com/xjZone/xj.viewport/search">
-			<input id="pub_headFormText" class="input-plain" name="q" type="search" autocomplete="off" placeholder="Search" />
-			<label id="pub_headFormIcon" class="fas fa-search" for="pub_headFormText"></label>
-		</form>
-		
-		<a id="pub_headCode" class="button" title="Get Source from GitHub" target="_blank" 
-		 href="https://github.com/xjZone/xj.viewport/"> <i class="fab fa-github"></i> </a>
-	</div>
-</div>
-
-
-
-<main id="pub_main">
-<div id="pub_mainPack">
-
-
-
-<section>
-<h2>基本介绍</h2>
-
-<p><b>简介</b> : xj.viewport 是一个用于浏览器视窗属性设置的插件，它可在移动端浏览器的页面中，检测设备的宽度和高度，然后动态的调整 <code>&lt;meta name=&quot;viewport&quot; /&gt;</code> 标签的 <code>content</code> 属性，为页面设置最小宽高度或最大宽高度，需要注意的是，该插件只在移动端页面才会生效，因为 viewport 视窗属性对 PC 端的浏览器并不起作用，但你也可以使用 Chrome 浏览器的移动端模拟功能来查看插件的效果。</p>
-
-<p><b>兼容</b> : IE10+ / Edge12+ / Firefox / Chrome / Safari / Opera / IOS Webkit / Android Platform</p>
-
-<p><b>更新</b> : <a target="_blank" href="https://github.com/xjZone/xj.viewport/blob/master/upgrade.md">https://github.com/xjZone/xj.viewport/blob/master/upgrade.md</a></p>
-
-<p><b>源码</b> : <a target="_blank" href="https://github.com/xjZone/xj.viewport/">https://github.com/xjZone/xj.viewport/</a></p>
-
-<p><b>协议</b> : <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, V2.0</a></p>
-
-<p><b>版本</b> : <select class="select-unset"><option selected="selected">0.3.2</option></select></p>
-
-<hr />
-</section>
 
 
 
@@ -186,7 +105,7 @@ FastClick.attach(document.body)},false);</script>
 <p>例如 iPhone4/5 的设备宽度既 <code>device-width</code> 为 <code>320px</code>，你觉得这个值太小了，想要个大点的值，可用下面这写法来实现，内联属性 <code>xj-viewport="{minWidth:512}"</code> 的意思是当设备宽度小于 <code>512px</code> 就将设备宽度设置为 <code>512px</code>，当设备宽度大于等于 <code>512px</code> 则不做任何修改，注意视窗属性只对移动端浏览器生效，但可用 Chrome 的移动端模拟来查看，之后的例子也都是这样，不再重复提示。</p>
 <p>点击链接即可查看 Demo 效果，实际上 Demo 页面还多了些提示的内容，诸如 <code>meta[name="viewport"]</code> 标签的 <code>content</code> 属性，以及当前视窗的宽高度和方向，下面展示出来的代码只写了些关键部分，虽然也能运行，但没有真实 Demo 页面那么多的信息，有兴趣可自行查看 Demo 页面的源码，后面的例子也都是这样，只展示关键性的内容，所以如果你发现代码和 Demo 内容有些许区别，那都是正常的。</p>
 
-<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./page/demo_01_minWidth.html&quot;&gt;minWidth.html&lt;/a&gt;',}">
+<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./demo_01_minWidth.html&quot;&gt;minWidth.html&lt;/a&gt;',}">
 <!doctype html>
 <html>
 	<head>
@@ -220,7 +139,7 @@ FastClick.attach(document.body)},false);</script>
 <p>其实 <code>viewport</code> 的 <code>height</code> 属性并没有得到任何浏览器的支持，插件实际上是用 <code>width</code> 属性和 <code>initial-scale</code> 属性的计算来实现最小高度，但大部分移动端的浏览器在滚动后，地址栏都会收起或展开，导致窗口的高度会频繁变化，但我们却不能跟着频繁修改视窗属性，因为这样会引起页面抖动和视窗比例出错，总而言之，我们设置的最小高度，都只在页面滚动前是准确的，滚动之后就不一定了。</p>
 <p>还要注意的是，视窗的最小高度是由 <code>width</code> 和 <code>initial-scale</code> 属性计算出来，但 <code>viewport</code> 的 <code>width</code> 属性并不支持小数，所以我们只能将 <code>width</code> 属性进行四舍五入取整，结果就导致最终计算出来的高度可能会有些偏差，无法保证绝对准确，如果你发现下面这个例子，窗口的高度是 <code>767px</code> 或 <code>769px</code>，那也是正常的，对于偏差问题，只能是开发者写 CSS 的时候注意一下，自行去兼容了。</p>
 
-<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./page/demo_02_minHeight.html&quot;&gt;minHeight.html&lt;/a&gt;',}">
+<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./demo_02_minHeight.html&quot;&gt;minHeight.html&lt;/a&gt;',}">
 <!doctype html>
 <html>
 	<head>
@@ -255,7 +174,7 @@ FastClick.attach(document.body)},false);</script>
 <p>最小宽度和最小高度也可以同时设置，例如下面这个 Demo，内联属性 <code>xj-viewport="{minWidth:512, minHeight:768}"</code> 的意思是将视窗的最小宽度和最小高度高分别设为 <code>512px</code> 和 <code>768px</code>，当页面的尺寸小于这个设置时将进行特殊的调整，确保屏幕总是能放下这个尺寸的内容，当设备宽高度分别大于 <code>512px</code> 和 <code>768px</code> 时，则不做任何修改，可以简单的将这例子当作是前面两个例子的综合表现。</p>
 <p>移动端一般用不着设置这么大的最小尺寸，这 Demo 只是为了方便查看效果而故意整出来的，跟第二个实例一样的原因，它的最小高度只在滚动前是准确的，滚动后就无法保证了，并且也可能会出现高度有 <code>± 2px</code> 偏差的问题，还有就是 Firefox(Android) 浏览器可能会出现明明不能滚动，但地址栏却还是会上下伸缩的情况，所以特别的为这个浏览器设置禁止滚动，避免在这个浏览器中尺寸会出现异常。</p>
 
-<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./page/demo_03_minSize.html&quot;&gt;minSize.html&lt;/a&gt;',}">
+<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./demo_03_minSize.html&quot;&gt;minSize.html&lt;/a&gt;',}">
 <!doctype html>
 <html>
 	<head>
@@ -263,7 +182,7 @@ FastClick.attach(document.body)},false);</script>
 		<meta name="viewport" xj-viewport="{minWidth:512, minHeight:768}" content="width=device-width,initial-scale=1" />
 		<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.2/dist/xj.viewport.min.js"></script>
 		<style>
-			html,body{overflow:hidden;margin:0;background-color:yellowgreen;-webkit-text-size-adjust:100%;}
+			html,body{margin:0;overflow:hidden;-webkit-text-size-adjust:100%;background-color:yellowgreen;}
 			.pack{position:absolute;top:50%;left:50%;margin:-384px 0 0 -256px;width:512px;height:768px;background-color:lightblue;}
 		</style>
 		<title>minSize</title>
@@ -291,10 +210,10 @@ FastClick.attach(document.body)},false);</script>
 <section>
 <h2>Demo04. 限制尺寸填充屏幕</h2>
 <p>下面这个例子的设置是 <code>xj-viewport="{minWidth:320, minHeight:480, fillScreen:true}"</code>，跟上面的实例类似，但这回最小宽高度被设置为 <code>320px * 480px</code>，并额外增加了 <code>fillScreen:true</code> 属性，意思是如果设备的宽高度大于我们设置的最小宽高度，就让设备宽高度变成我们设置的这个值，说白了就是将视窗缩小，或者说将内容放大，具体的表现，你点击 Demo 链接，自己体验一下就知道了。</p>
-<p>一般的页面，设置 <code>minWidth</code> 就够了，需要用到 <code>minHeight</code>，往往是那种 fullPage 整屏翻页项目，这类项目不能滚动，拖曳时是整页切换的，此时设置最小宽高度的功能就能用上了，这有个更复杂的案例 : <a target="_blank" href="./page/demo_11_fullPage.html">fullPage</a>，它增加了更多细节，页面用到了 <a target="_blank" href="https://github.com/jquery/jquery">jQuery</a> 库以及 <a target="_blank" href="https://github.com/rstacruz/jquery.transit">jQuery-transit</a> 插件，该插件能让 jQuery 支持 <code>transform</code> 动画，它将 <code>translateY</code> 属性简化为 <code>y</code>，更多细节可自行查看源码。</p>
+<p>一般的页面，设置 <code>minWidth</code> 就够了，需要用到 <code>minHeight</code>，往往是那种 fullPage 整屏翻页项目，这类项目不能滚动，拖曳时是整页切换的，此时设置最小宽高度的功能就能用上了，这有个更复杂的案例 : <a target="_blank" href="./demo_11_fullPage.html">fullPage</a>，它增加了更多细节，页面用到了 <a target="_blank" href="https://github.com/jquery/jquery">jQuery</a> 库以及 <a target="_blank" href="https://github.com/rstacruz/jquery.transit">jQuery-transit</a> 插件，该插件能让 jQuery 支持 <code>transform</code> 动画，它将 <code>translateY</code> 属性简化为 <code>y</code>，更多细节可自行查看源码。</p>
 <p>在上面的这个 fullPage 案例中，XJ 自己实现了拖曳翻页的功能，但实际上这类需求，业界已有很多现成且成熟的方案，如 <a target="_blank" href="https://www.swiper.com.cn/">swiper</a> 或 <a target="_blank" href="https://alvarotrigo.com/fullPage/">fullPage</a> 插件(该插件是收费的)都可以做到，但这些跟 xj.viewport 插件都没什么关系，在这里就不多说了，有兴趣的可以自行研究，然而不管你选择了什么方案来实现拖曳翻页的功能，你总是需要设置到页面的最小视窗尺寸，此时 xj.viewport 插件就能派上用场了。</p>
 
-<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./page/demo_04_minFill.html&quot;&gt;minFill.html&lt;/a&gt;',}">
+<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./demo_04_minFill.html&quot;&gt;minFill.html&lt;/a&gt;',}">
 <!doctype html>
 <html>
 	<head>
@@ -302,7 +221,7 @@ FastClick.attach(document.body)},false);</script>
 		<meta name="viewport" xj-viewport="{minWidth:320, minHeight:480, fillScreen:true}" content="width=device-width,initial-scale=1" />
 		<script src="https://cdn.jsdelivr.net/gh/xjZone/xj.viewport@0.3.2/dist/xj.viewport.min.js"></script>
 		<style>
-			html,body{overflow:hidden;margin:0;background-color:yellowgreen;-webkit-text-size-adjust:100%;}
+			html,body{margin:0;overflow:hidden;-webkit-text-size-adjust:100%;background-color:yellowgreen;}
 			.pack{position:absolute;top:50%;left:50%;margin:-240px 0 0 -160px;width:320px;height:480px;background-color:lightblue;}
 		</style>
 		<title>minFill</title>
@@ -331,7 +250,7 @@ FastClick.attach(document.body)},false);</script>
 <h2>Demo05. 设置固定的宽度值</h2>
 <p>下面这个例子的设置是 <code>xj-viewport="{width:512}"</code>，意思是不管设备的原始宽度尺寸是多少，反正就将宽度尺寸固定为 <code>512px</code>，但实际上这种做法很少会被用到，因为这样会导致在一些大屏设备如 iPad 中显得很怪异，因为页面的尺寸会被放大许多，导致页面显得臃肿不堪，如果设置的尺寸太大了，在小屏设备上又会因为内容过小而难以看清，总而言之固定尺寸的做法意义不大，这里只是简单展示。</p>
 
-<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./page/demo_05_width.html&quot;&gt;width.html&lt;/a&gt;',}">
+<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./demo_05_width.html&quot;&gt;width.html&lt;/a&gt;',}">
 <!doctype html>
 <html>
 	<head>
@@ -364,7 +283,7 @@ FastClick.attach(document.body)},false);</script>
 <p>下面这个例子的设置是 <code>xj-viewport="{height:768}"</code>，意思为不管设备的原始高度值是多少，反正就将高度尺寸固定为 <code>768px</code> 了，固定高度跟上面的固定宽度的例子相同的在展示上有缺陷，在有些设备上看着总会很怪异，所以也很少会被用到，此外固定高度也跟上面的设置最小高度的例子一样，存在因不支持小数而导致高度可能会有 <code>± 2px</code> 的偏差，总而言之固定高度的做法在实际上意义也不大。</p>
 <p>需要注意的是，跟 <code>minWidth</code> 和 <code>minHeight</code> 这对属性不同，设置固定尺寸的 <code>width</code> 和 <code>height</code> 这对属性不能同时存在且生效，因为屏幕的尺寸和 <code>div</code> 等标签不同，它是有固定比例的，宽度变化会影响到高度，高度变化也会影响到宽度，并且由于这个原因，设置固定尺寸的这对属性，跟 <code>minWidth & minHeight</code> 这对属性以及后面将提到的 <code>maxWidth & maxHeight</code> 这对属性也不能同时存在。</p>
 
-<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./page/demo_06_height.html&quot;&gt;height.html&lt;/a&gt;',}">
+<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./demo_06_height.html&quot;&gt;height.html&lt;/a&gt;',}">
 <!doctype html>
 <html>
 	<head>
@@ -396,11 +315,11 @@ FastClick.attach(document.body)},false);</script>
 
 <section>
 <h2>Demo07. 设置最大的宽高度</h2>
-<p>插件还提供了 <code>maxWidth & maxHeight</code> 这对属性，用于设置窗口的最大尺寸，但用法跟 <code>minWidth & minHeight</code> 这对属性也没什么区别，所以这里也不再啰嗦的逐个案例展示代码，有兴趣可直接查看这些 Demo 既 <a target="_blank" href="./page/demo_07_maxWidth.html">maxWidth</a> 和 <a target="_blank" href="./page/demo_08_maxHeight.html">maxHeight</a> 和 <a target="_blank" href="./page/demo_09_maxSize.html">maxSize</a>，XJ 虽然提供了这些属性和 Demo，但实际上它们究竟有什么使用场景，XJ 其实也没想出来，只是顺手提供了而已，毕竟限制窗口的最大尺寸真的很少见…</p>
+<p>插件还提供了 <code>maxWidth & maxHeight</code> 这对属性，用于设置窗口的最大尺寸，但用法跟 <code>minWidth & minHeight</code> 这对属性也没什么区别，所以这里也不再啰嗦的逐个案例展示代码，有兴趣可直接查看这些 Demo 既 <a target="_blank" href="./demo_07_maxWidth.html">maxWidth</a> 和 <a target="_blank" href="./demo_08_maxHeight.html">maxHeight</a> 和 <a target="_blank" href="./demo_09_maxSize.html">maxSize</a>，XJ 虽然提供了这些属性和 Demo，但实际上它们究竟有什么使用场景，XJ 其实也没想出来，只是顺手提供了而已，毕竟限制窗口的最大尺寸真的很少见…</p>
 <p>值得一提的是设置最大尺寸的两个属性也能配合 <code>fillScreen</code> 属性使用，但此时的结果就变成如果设备尺寸小于设置的最大尺寸，将会放大设备的尺寸，到达设置的最大尺寸值，说白了就是限制最大尺寸，但同时又在尺寸未到达最大尺寸时候设置为最大尺寸，听着很绕？自己点击 Demo 体会吧，实在看不懂也无所谓，这个案例就随他去吧，反正 XJ 也没想到有什么有能用到的场景，纯粹就只是凑数而已。</p>
 <p>最后解释一下，为什么设置尺寸的三对属性不能同时存在，例如设备的尺寸是 <code>400 * 600</code>，<code>minWidth & minHeight</code> 被设置为 <code>600 * 600</code>，那么设备尺寸将变成 <code>600 * 900</code>，<code>maxWidth & maxHeight</code> 设置为 <code>600 * 600</code>，那么设备的尺寸将变成 <code>400 * 600</code>，此时两对属性的设置就有冲突，而固定尺寸的 <code>width & height</code> 还会让情况变得更乱，总之固定比例的屏幕尺寸就是没法随心所欲设置啦。</p>
 
-<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./page/demo_10_maxFill.html&quot;&gt;maxFill.html&lt;/a&gt;',}">
+<textarea class="xjDemo" xjDemo="{larger:true, sourceShow:true, resultContent:'查看 Demo 页面 : &lt;a target=&quot;_blank&quot; href=&quot;./demo_10_maxFill.html&quot;&gt;maxFill.html&lt;/a&gt;',}">
 <!doctype html>
 <html>
 	<head>
@@ -580,38 +499,57 @@ xj.viewportConfig['0.3.2'] = {
 <h2>项目备注</h2>
 <p>01. 必须有设置 <code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot; /&gt;</code>，否则插件初始化时就有可能会出错。</p>
 <p>02. 即使设置了 <code>userScalable:'no'</code>，Safari(IOS) 中页面还是能缩放，因为苹果觉得 "用户有权控制缩放"，这不是本插件的 BUG。</p>
-<p>03. 有疑问或发现 BUG，可到 GitHub 提 <a target="_blank" href="https://github.com/xjZone/xj.viewport/issues">Issue</a>，如果觉得插件写得还行，请在 GitHub 为本项目点个 <a target="_blank" href="https://github.com/xjZone/xj.viewport">★Star</a> 吧，感谢啦 ಠ‿ಠ ❤。</p>
+<p>03. 有疑问或发现 BUG，可到 GitHub 提 <a target="_blank" href="https://github.com/xjZone/xj.viewport/issues">Issue</a>，如果觉得插件写得还行，在 GitHub 中为本项目点个 <a target="_blank" href="https://github.com/xjZone/xj.viewport">★Star</a> 吧，感谢啦 ಠ‿ಠ ❤。</p>
 <hr />
 </section>
 
 
 
-<!-- <section>
-<h2>推荐阅读</h2>
-<p>XJ.Chen - <a target="_blank" href="https://juejin.cn/????">漫谈移动端 viewport 视口设置的一些用途以及可能遭遇的各种问题</a></p>
-<hr />
-</section> -->
+<!-- <section><button class="xjButton xjButton-md xjButton-default xjButton-square" type="button" title="changeTheme" style="position:fixed;z-index:40;right:16px;bottom:16px;border-radius:4px;" 
+onclick="$('html').toggleClass('xj-base-black')"><i class="fa fa-lightbulb"></i></button></section> -->
 
+<script>
+// 可在引入插件前，通过 xj.viewportConfig['0.3.2'] 对 set() 方法的参数进行预设，注意版本号要相同
+// 可在引入插件前，通过 xj.viewportOption['0.3.2'] 对 xj.viewport 进行全局配置，注意版本号要相同
+// if(window.xj === undefined){ xj = {} };
 
+// if(xj.viewportConfig === undefined){ xj.viewportConfig = {} };
+// xj.viewportConfig['0.3.2'] = {
+// 	manual : true,
+// 	betkbd : 248,
+// };
 
-</div>
-</main>
+// if(xj.viewportOption === undefined){ xj.viewportOption = {} };
+// xj.viewportOption['0.3.2'] = {
+//	onlyMobile : false,
+//	viewportFit : 'cover',
+//};
+</script>
 
+<!-- <script>document.write('<link rel="stylesheet" href="../dist/xj.viewport.css?timeStamp='+ Date.now() +'" />')</script> -->
+<script>document.write('<script src="../dist/xj.viewport.js?timeStamp='+ Date.now() +'"><\/script>')</script>
+<script>
+$(function(){
 
+xj.viewport.set({minWidth:400, onlyMobile:false, });
+console.log(xj.viewport);
 
-<div id="pub_foot">
-	<div id="pub_footPack">
-		<div>Copyright © 2015-<script>document.write(new Date().getFullYear())</script> XJ.Chen All Rights Reserved</div>
-		<div>More XJ Plugins : <a target="_blank" href="https://github.com/xjZone/">https://github.com/xjZone/</a></div>
-	</div>
-</div>
+// {
+// 	version : '0.3.2',		// 当前插件和配置的版本号
+//	element : viewport,		// meta[name="viewport"] 标签
+// 	
+// 	width :ƒ(),				// 获取当前视窗的宽度，不包括地址栏和滚动部分
+// 	height :ƒ(),			// 获取当前视窗的高度，不包括地址栏和滚动部分
+// 	
+//	orientation : ƒ(),		// 获取设备方向，landscape 或 portrait，相等返回 squared
+//	softKeyboard : ƒ(),		// 判断是否有软键盘，只针对 Android，IOS 和 PC 总返回 false，因为无法得知
+//	
+//	get : ƒ(),				// 获取 meta[name="viewport"] 标签的 content 属性
+//	set : ƒ(),				// 设置 meta[name="viewport"] 标签的 content 属性
+// }
 
-<div id="pub_tool">
-	<div id="pub_toolPack">
-		<button id="pub_toolSwitchDir" type="button" title="Switch The Dir"><i class="fas fa-list-ul"></i></button>
-		<button id="pub_toolBackToTop" type="button" title="Back to Top"><i class="fas fa-angles-up"></i></button>
-	</div>
-</div>
+});
+</script>
 
 
 

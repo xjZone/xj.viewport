@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" xj-viewport="{maxHeight:512, onlyMobile:false}" content="width=device-width,initial-scale=1" />
+<script>document.write('<script src="../dist/xj.viewport.js?timeStamp='+ Date.now() +'"><\/script>')</script>
+
+<style>
+@font-face{font-family:"Iosevka";src:url("../static/font/iosevka/6.1.2/iosevka-fixed-regular.woff2") 
+	format("woff2"), url("../static/font/iosevka/6.1.2/iosevka-fixed-regular.woff") format("woff");}
+html{word-break:break-all;font: 14px/1.5 Iosevka, "Microsoft YaHei", "Hiragino Sans GB", Monospace;}
+</style>
+<style>
+html,body{margin:0px;-webkit-text-size-adjust:100%;}
+.div01{height:256px;background-color:yellowgreen;}
+.div02{height:256px;background-color:lightsalmon;}
+.div03{height:256px;background-color:lightblue;}
+.div04{height:256px;background-color:bisque;}
+</style>
+
+<title>maxHeight</title>
+</head>
+<body>
+
+
+
+<div class="div01">
+	<div>当高度大于 512px，则设备高度将会被设置为 512px，小于则不做修改，尝试翻转屏幕查看吧。</div>
+	<br />
+	<div>初始值 : width=device-width,initial-scale=1，设置值 : {maxHeight:512, onlyMobile:false, }</div>
+	<br />
+	<div><span id="viewportContent"></span>，<span id="viewportDetails"></span></div>
+	<br />
+</div>
+<div class="div02">height : 256px</div>
+<div class="div03">height : 256px</div>
+<div class="div04">height : 256px</div>
+
+
+
+<script>
+(function(){
+
+// 获取当前窗口的设置、尺寸、方向
+var resizeListener = function(){
+	document.getElementById('viewportContent').innerHTML = 'content : ' + xj.viewport.get();
+	document.getElementById('viewportDetails').innerHTML = 'width : ' + xj.viewport.width() + ' / height : ' + xj.viewport.height() +' / orientation : '+ xj.viewport.orientation();
+};
+resizeListener();
+window.addEventListener('resize', resizeListener, false);
+
+})();
+</script>
+
+
+
+</body>
+</html>
+
+
