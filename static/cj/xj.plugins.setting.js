@@ -45,8 +45,8 @@ xj.baseOption['0.4.0'] = {};
 if(!xj.Arrive){ xj.Arrive = {} };
 if(!xj.Arrive.config){ xj.Arrive.config = {} };
 if(!xj.Arrive.option){ xj.Arrive.option = {} };
-xj.Arrive.config['0.3.1'] = {};
-xj.Arrive.option['0.3.1'] = {};
+xj.Arrive.config['0.3.2'] = {};
+xj.Arrive.option['0.3.2'] = {};
 
 // xjDemo
 if(!xj.Demo){ xj.Demo = {} };

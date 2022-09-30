@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/all.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 <script src="../static/cj/xj.plugins.setting.js"></script>
 
 <script src="https://cdn.jsdelivr.net/gh/xjZone/xj.storage@0.2.2/dist/xj.storage.min.js"></script>
@@ -23,9 +23,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xjZone/xj.focus@0.3.2/dist/xj.focus.min.css" />
 <script src="https://cdn.jsdelivr.net/gh/xjZone/xj.focus@0.3.2/dist/xj.focus.min.js"></script>
 
-<link id="prism-theme-white" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.7.0/themes/prism-material-light.css" />
+<link id="prism-theme-white" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-material-light.css" />
 <link id="prism-theme-black" rel="alternate stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism-okaidia.css" />
 <script data-manual="prevent prism auto highlighted pre or code" src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/plugins/keep-markup/prism-keep-markup.min.js"></script>
+<style>.xjDemo-pack .xjDemo-body-source-wrap > code mark{background-color:rgba(255,255,64,1.00);}</style>
 
 <link rel="stylesheet" href="../static/plugin/xjDemo/0.1.0/dist/xjDemo.min.css" />
 <script src="../static/plugin/xjDemo/0.1.0/dist/xjDemo.min.js"></script>
@@ -509,16 +512,17 @@ xj.viewportConfig['0.3.2'] = {
 onclick="$('html').toggleClass('xj-base-black')"><i class="fa fa-lightbulb"></i></button></section> -->
 
 <script>
-// 可在引入插件前，通过 xj.viewportConfig['0.3.2'] 对 set() 方法的参数进行预设，注意版本号要相同
-// 可在引入插件前，通过 xj.viewportOption['0.3.2'] 对 xj.viewport 进行全局配置，注意版本号要相同
-// if(window.xj === undefined){ xj = {} };
+// 可在引入插件前，通过 xj.viewportConfig['0.3.2'] 对 xj.viewport 进行全局配置，注意版本号要相同
+// 可在引入插件前，通过 xj.viewportOption['0.3.2'] 对 set() 方法的参数进行预设，注意版本号要相同
 
+// if(window.xj === undefined){ xj = {} };
 // if(xj.viewportConfig === undefined){ xj.viewportConfig = {} };
 // xj.viewportConfig['0.3.2'] = {
 // 	manual : true,
 // 	betkbd : 248,
 // };
 
+// if(window.xj === undefined){ xj = {} };
 // if(xj.viewportOption === undefined){ xj.viewportOption = {} };
 // xj.viewportOption['0.3.2'] = {
 //	onlyMobile : false,
