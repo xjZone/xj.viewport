@@ -8,50 +8,50 @@
 
 
 // ---------------------------------------------------------------------------------------------
-// globalThis | window | self | global
-var pub_global = (typeof(globalThis) !== 'undefined' ? globalThis : typeof(window) !== 'undefined' ? window : typeof(self) !== 'undefined' ? self : global);
+// globalThis, window, self, global
+var pub_global = (typeof(globalThis) !== 'undefined') ? globalThis : (typeof(window) !== 'undefined') ? window : (typeof(self) !== 'undefined') ? self : global;
 
 // public nothing, version, keyword
 var pub_nothing = function(){}, pub_version = '0.3.2', pub_keyword = 'viewport';
 
-// public config, advance set
+// public config
 var pub_config = {
 	
-	// meta[name="viewport"] 标签上有 xj-viewport="{}" 属性时，会解析该属性并自动执行 xj.viewport.set() 方法，如果该参数为 true 则不会自动执行，默认是 false
+	// meta[name="viewport"] 标签上有设置 xj-viewport="{}" 属性时，会解析该属性并自动执行 xj.viewport.set() 方法，如果该配置为 true 则不会自动执行，默认是 false
 	manual : false,
 	
-	// 在 Android 的浏览器中，软键盘的存在会影响到窗口尺寸，在有软键盘时不能响应视窗的重置，但实际上我们并没有任何真正靠谱的方法来检测浏览器是否弹起了软键盘
-	// 只能先查看当前聚焦的节点是否为可输入元素，如果 document.activeElement 是可输入的，还要检测 screen.height - window.innherHeight 的差值，差值大于 240px
-	// 才算是弹起了软键盘，240px 是赌浏览器地址栏和工具栏高度小于 240px 而小键盘高度大于 240px，在绝大多数浏览器中该判断都是成立的，但 XJ 无法保证所有浏览器
-	// 都符合这个判断，如果你在开发中真的遇到了某些特殊的情况，那么可针对这个特殊情况进行浏览器的判断，并修改这个参数来进行适应，这个参数默认是 240，单位 px
+	// 在 Android 的浏览器中，软键盘是否存在会影响到窗口的尺寸，在有软键盘时不能响应视窗的重置，但实际上我们并没有任何真正靠谱的方法来检测浏览器是否弹起了软键盘
+	// 只能是先查看当前聚焦的节点是否为可输入的元素，如果 document.activeElement 是可输入的，还要检测 screen.height - window.innherHeight 的差值，差值大于 240px
+	// 才算是弹起了软键盘，240px 是赌浏览器的地址栏加工具栏的高度小于 240px 而小键盘高度大于 240px，在绝大多数浏览器中该判断都是成立的，但 XJ 无法保证所有浏览器
+	// 都符合这个判断，如果你在开发中真的遇到了某些特殊的情况，那么可以针对这个特殊情况进行浏览器的判断，然后修改这个配置来进行适应，这个配置默认是 240，单位 px
 	betkbd : 240,
 	
 };
 
-// public option(16 items)
+// public option
 var pub_option = {
 	
-	minWidth : 0,				// 设置视窗的最小宽度值，默认是 0 既不设置，当设备的宽度小于该参数时将通过设置 width 和 initial-scale 将设备宽度变得符合该值
-	minHeight : 0,				// 设置视窗的最小高度值，默认是 0 既不设置，当设备的高度小于该参数时将通过设置 width 和 initial-scale 将设备高度变得符合该值
+	minWidth : 0,				// 设置视窗的最小宽度值，默认是 0 既不设置，当设备的宽度小于这个参数时，将通过设置 width 和 initial-scale 将设备宽度变得符合该值
+	minHeight : 0,				// 设置视窗的最小高度值，默认是 0 既不设置，当设备的高度小于这个参数时，将通过设置 width 和 initial-scale 将设备高度变得符合该值
 	
-	width : 'auto',				// 设置 width 值，默认是 'auto'，当设置为数值的时候 initial-scale 会跟着变化，设置为 'device-width' 时，initial-scale 则总 1
-	height : 'auto',			// 设置 height 值，默认是 'auto'，没有任何浏览器支持视窗的 height，所以实际上插件是通过 width 属性和设备宽高比来得到目标高度
+	width : 'auto',				// 设置 width 值，默认是 'auto'，当设置为数值的时候 initial-scale 会跟着变化，当设置为 'device-width' 时，initial-scale 将总是 1
+	height : 'auto',			// 设置 height 值，默认是 'auto'，当前没有浏览器支持 viewport 的 height，所以实际上插件是通过 width 属性和设备宽高比得到目标高度
 	
-	maxWidth : 'none',			// 设置视窗的最大宽度值，默认是 'none' 既不设置，当宽度大于该参数，将通过设置 width & initial-scale 来将设备宽度变得符合该值
-	maxHeight : 'none',			// 设置视窗的最大高度值，默认是 'none' 既不设置，当高度大于该参数，将通过设置 width & initial-scale 来将设备高度变得符合该值
+	maxWidth : 'none',			// 设置视窗的最大宽度值，默认是 'none' 既不设置，当宽度大于这个参数时，将通过设置 width & initial-scale 来将设备宽度变得符合该值
+	maxHeight : 'none',			// 设置视窗的最大高度值，默认是 'none' 既不设置，当高度大于这个参数时，将通过设置 width & initial-scale 来将设备高度变得符合该值
 	
-	onlyMobile : true,			// 是否只对移动端的 meta[name="viewport"] 标签进行设置，默认是 true，为 false 则 PC 端的 meta 标签也会被设置，但视窗不会变化
-	fillScreen : false,			// 同时设置了最小宽高尺寸或最大宽高尺寸，如果窗口宽高值没到达极限，是否缩放到极限，默认是 false，这一般只用于 full page 项目
-	delayReset : 500,			// Android 中部分浏览器如 UC 和 IOS 中部分浏览器如 WX，旋转后立即获取尺寸会出现错误，需要延迟响应，这是延迟时间，默认 500 ms
+	onlyMobile : true,			// 是否只对移动端的 meta[name="viewport"] 标签进行设置，默认是 true，如果为 false 则 PC 端的 meta 标签也会被设置，但视窗不会变化
+	fillScreen : false,			// 在同时设置了最小宽高尺寸或最大宽高尺寸时，如果窗口宽高值没到达极限，是否缩放到极限，默认是 false，这一般只用于 full page 项目
+	delayReset : 500,			// Android 中部分浏览器如 UC 和 IOS 中部分浏览器如 WX，在屏幕旋转后立即获取尺寸将会出错，需要延迟响应，这是延迟时间，默认 500 ms
 	
-	initialScale : 'auto',		// 设置 initial-scale 值，可接受 0 - 10 之间的值，默认是 'auto'，'auto' 就是让插件自动计算，这个一般不用设置，让插件计算就行
-	minimumScale : 'none',		// 设置 minimum-scale 值，可接受 0 - 10 之间的值，默认是 'none'，也就是不设置，如果为 'auto'，则使用跟 initialScale 一样的值
-	maximumScale : 'none',		// 设置 maximum-scale 值，可接受 0 - 10 之间的值，默认是 'none'，也就是不设置，如果为 'auto'，则使用跟 initialScale 一样的值
-	userScalable : 'none',		// 设置 user-scalable 值，备选项有 'yes', 'no' 两个值，默认 'none' 既不设置，IOS10+ 会忽略该参数和上面两个控制最大最小的参数
+	initialScale : 'auto',		// 设置 initial-scale 值，可以接受 0 - 10 之间的值，默认是 'auto'，'auto' 就是让插件自动计算，这个一般不用设置的，让插件计算就行
+	minimumScale : 'none',		// 设置 minimum-scale 值，可以接受 0 - 10 之间的值，默认是 'none'，也就是不设置，如果为 'auto'，则会使用跟 initialScale 一样的值
+	maximumScale : 'none',		// 设置 maximum-scale 值，可以接受 0 - 10 之间的值，默认是 'none'，也就是不设置，如果为 'auto'，则会使用跟 initialScale 一样的值
+	userScalable : 'none',		// 设置 user-scalable 值，备选项有 'yes' 和 'no' 两个值，默认是 'none' 既不设置，IOS10+ 会忽略该参数和上面两个控制最大最小的参数
 	
-	targetDensitydpi : '',		// 设置 target-densitydpi 值，默认 '' 既不设置，备选项有 high-dpi, medium-dpi, low-dpi, device-dpi，该属性实际已废弃，可忽略
-	viewportFit : '',			// 设置 viewport-fit 值，默认是 '' 既不设置，备选项有 auto, cover, contain，该参数主要是针对 iPhone X 这类刘海屏幕设备的环境
-	resize : true,				// 当窗口的尺寸变化或翻转时，是否要重新计算 viewport 的 content 属性，默认是 true，为 true 时注意 userScalable 参数不能为 no
+	targetDensitydpi : '',		// 设置 target-densitydpi 值，默认是 '' 既不设置，备选项有 high-dpi, medium-dpi, low-dpi, device-dpi，该属性实际已废弃，可以忽略
+	viewportFit : '',			// 设置 viewport-fit 值，默认是 '' 既不设置，备选项有 auto, cover, contain，该参数主要是针对 iPhone X 这类拥有刘海屏幕的设备环境
+	resize : true,				// 当窗口尺寸发生变化或翻转时，是否要重新计算 viewport 的 content 属性，默认是 true，为 true 时注意 userScalable 参数不能为 'no'
 	
 };
 
@@ -65,7 +65,7 @@ if(pub_global.xj.viewportReturn[pub_version] !== undefined){ return pub_global.x
 
 
 
-// 创建并合并 config 和 option 参数
+// 创建并合并 config 和 option 对象
 if(pub_global.xj.viewportConfig === undefined){ pub_global.xj.viewportConfig = {} };
 if(pub_global.xj.viewportOption === undefined){ pub_global.xj.viewportOption = {} };
 if(pub_global.xj.viewportConfig[pub_version] !== undefined){ Object.keys(pub_global.xj.viewportConfig[pub_version]).forEach(function(key){ pub_config[key] = pub_global.xj.viewportConfig[pub_version][key] }) };
@@ -118,7 +118,7 @@ var pub_orientation = function(){
 var pub_prefixUserModify = (/Firefox/i.test(navigator.userAgent) === true ? 'MozUserModify' : 'webkitUserModify');
 var pub_getStyleObject = function(element, pseudoSelector){ return pub_win.getComputedStyle(element, pseudoSelector ? pseudoSelector : null) };
 var pub_isModifiable = function(element){
-	if(/^input|textarea$/i.test(element.nodeName) === true){ return false };
+	if(/^(input|textarea)$/i.test(element.nodeName) === true){ return false };
 	return (element.isContentEditable === true || (pub_doc.documentMode === undefined && /write/i.test(pub_getStyleObject(element)[pub_prefixUserModify]) === true)) ? true : false;
 };
 
@@ -170,9 +170,9 @@ var pub_softKeyboard = function(){
 	return false };
 	
 	// 是 input 或 textarea，但只读或禁用，也是没有
-	if(/^input|textarea$/i.test(activeElement.nodeName) === true){
+	if(/^(input|textarea)$/i.test(activeElement.nodeName) === true){
 		if(/^color$/i.test(activeElement.type) === true && pub_colorSupports === true){ return false };
-		if(/^textarea|text|email|tel|url|number|search|password|date|time|week|month|range|color$/i.test(activeElement.type) === false){ return false };
+		if(/^(textarea|text|email|tel|url|number|search|password|date|time|week|month|range|color)$/i.test(activeElement.type) === false){ return false };
 		if(activeElement.readOnly === true || activeElement.disabled === true || activeElement.hasAttribute('readOnly') === true || activeElement.hasAttribute('disabled') === true){ return false };
 	};
 	
